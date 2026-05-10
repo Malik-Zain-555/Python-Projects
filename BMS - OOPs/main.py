@@ -66,9 +66,12 @@ class Bank:
             print("Account Found!")
             print(f"Welcome Back {userDetails[0]["name"]}!")
             userDopistedMoney = int(input("How much you want to deposit? \nEnter your money:- "))
-            userDetails[0]["balance"] += userDopistedMoney
-            Bank.update()
-            print(f"The {userDopistedMoney} of money has been deposited successfully in your Bank!")
+            if userDopistedMoney < 0 and userDopistedMoney > 10000:
+                print("Please deposite in between this given range( 0 - 10000 ) | Try again!")
+            else:
+                userDetails[0]["balance"] += userDopistedMoney
+                Bank.update()
+                print(f"The {userDopistedMoney} of money has been deposited successfully in your Bank!")
     
     def Withdraw_money(self):
         accNo = input("Enter Account Number:- ")
@@ -81,10 +84,29 @@ class Bank:
         else:
             print("Account Found!")
             print(f"Welcome Back {userDetails[0]["name"]}!")
-            userDopistedMoney = int(input("How much you want to withdraw? \nEnter your money:- "))
-            userDetails[0]["balance"] -= userDopistedMoney
-            Bank.update()
-            print(f"The {userDopistedMoney} of money has been withdraw successfully from your Bank!")
+            userWithdrawMoney = int(input("How much you want to withdraw? \nEnter your money:- "))
+            if userWithdrawMoney < 0 and userWithdrawMoney > 10000:
+                print("Please withdraw in between this given range( 0 - 10000 ) | Try again!")
+            else:
+                if userWithdrawMoney > userDetails[0]["balance"]:
+                    print("You don'tave enough money to withdraw!")
+                else:
+                    userDetails[0]["balance"] -= userWithdrawMoney
+                    Bank.update()
+                    print(f"The {userWithdrawMoney} of money has been withdraw successfully in your Bank!")
+    
+    def Account_details(self):
+        accNo = input("Enter Account Number:- ")
+        pin = int(input("Enter Pin:- "))
+        
+        userDetails = [i for i in Bank.data if i["accountNo."] == accNo and i["pin"] == pin]
+        
+        if userDetails == False:
+            print("Something Went Wrong!")
+        else:
+            print("\nAccount Found!\n\n")
+            for keys,values in userDetails[0].items():
+                print(f"{keys}: {values}")
 
 user = Bank()
 
@@ -103,3 +125,5 @@ if userResponse == 2:
     user.Deposite_money()
 if userResponse == 3:
     user.Withdraw_money()
+if userResponse == 4:
+    user.Account_details()
