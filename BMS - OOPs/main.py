@@ -55,7 +55,20 @@ class Bank:
         Bank.update()
     
     def Deposite_money(self):
-        pass
+        accNo = input("Enter Account Number:- ")
+        pin = int(input("Enter Pin:- "))
+        
+        userDetails = [i for i in Bank.data if i["accountNo."] == accNo and i["pin"] == pin]
+        
+        if userDetails == False:
+            print("Something Went Wrong!")
+        else:
+            print("Account Found!")
+            print(f"Welcome Back {userDetails[0]["name"]}!")
+            userDopistedMoney = int(input("How much you want to deposit? \nEnter your money:- "))
+            userDetails[0]["balance"] += userDopistedMoney
+            Bank.update()
+            print(f"The {userDopistedMoney} of money has been deposited successfully in your Bank!")
 
 user = Bank()
 
