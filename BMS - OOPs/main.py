@@ -69,6 +69,22 @@ class Bank:
             userDetails[0]["balance"] += userDopistedMoney
             Bank.update()
             print(f"The {userDopistedMoney} of money has been deposited successfully in your Bank!")
+    
+    def Withdraw_money(self):
+        accNo = input("Enter Account Number:- ")
+        pin = int(input("Enter Pin:- "))
+        
+        userDetails = [i for i in Bank.data if i["accountNo."] == accNo and i["pin"] == pin]
+        
+        if userDetails == False:
+            print("Something Went Wrong!")
+        else:
+            print("Account Found!")
+            print(f"Welcome Back {userDetails[0]["name"]}!")
+            userDopistedMoney = int(input("How much you want to withdraw? \nEnter your money:- "))
+            userDetails[0]["balance"] -= userDopistedMoney
+            Bank.update()
+            print(f"The {userDopistedMoney} of money has been withdraw successfully from your Bank!")
 
 user = Bank()
 
@@ -85,3 +101,5 @@ if userResponse == 1:
     user.Create_account()
 if userResponse == 2:
     user.Deposite_money()
+if userResponse == 3:
+    user.Withdraw_money()
